@@ -74,7 +74,9 @@
 
 .last{
 width:100%;
-    backgrounf-color:black;
+    padding:20px;
+    border-radius:20px;
+    background-color:black;
 }
 
 

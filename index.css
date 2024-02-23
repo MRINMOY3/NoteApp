@@ -69,3 +69,15 @@
     right: 15px;
     cursor: pointer;
 }
+
+
+
+.last{
+width:100%;
+    backgrounf-color:black;
+}
+
+
+.last .stmnt{
+color:white;
+}

@@ -1,55 +1,45 @@
 const notesContainer = document.querySelector(".notes-container");
 const createBtn = document.querySelector(".btn");
-let notes  =  document.querySelectorAll(".input-box")
+let notes = document.querySelectorAll(".input-box");
 
-
-function showNotes()
-{
-    notesContainer.innerHTML = localStorage.getItem("notes")
+function showNotes() {
+    notesContainer.innerHTML = localStorage.getItem("notes");
 }
 
-showNotes
+// You're missing parentheses to actually call the function
+showNotes();
 
-function updateStorage(){
-    localStorage.setItem("notes",notesContainer.innerHTML)
+function updateStorage() {
+    localStorage.setItem("notes", notesContainer.innerHTML);
 }
 
-
-
-createBtn.addEventListener("click",()=>{
+createBtn.addEventListener("click", () => {
     let inputBox = document.createElement("p");
-    let img = document.createElement("img")
+    let img = document.createElement("img");
     inputBox.className = "input-box";
-    inputBox.setAttribute("contenteditable","true");
+    inputBox.setAttribute("contenteditable", "true");
     img.src = "images/delete.png";
-    notesContainer.appendChild(inputBox).append(img);
-})
+    notesContainer.appendChild(inputBox).appendChild(img); // Appending both inputBox and img to notesContainer
+});
 
-
-
-notesContainer.addEventListener("click",function(e){
-    if(e.target.tagName === "IMG"){
+notesContainer.addEventListener("click", function (e) {
+    if (e.target.tagName === "IMG") {
         e.target.parentElement.remove();
-        updateStorage(params)
-    }
-
-    else if(e.target.tagName === "P")
-    {
-        notes = document.querySelectorAll("input-box");
-        notes.forEach(nt =>{
-            nt.onkeyup = function()
-            {
+        updateStorage(); // Removed unnecessary 'params' parameter
+    } else if (e.target.tagName === "P") {
+        // Here, you're trying to select elements with class 'input-box', so you should use '.input-box' in the querySelectorAll
+        notes = document.querySelectorAll(".input-box");
+        notes.forEach((nt) => {
+            nt.onkeyup = function () {
                 updateStorage();
-            }
-        })
+            };
+        });
     }
-})
+});
 
-
-document.addEventListener("keydown",event =>{
-    if(event.key ==="Enter")
-    {
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
         document.execCommand("insertLineBreak");
         event.preventDefault();
     }
-})
+});
